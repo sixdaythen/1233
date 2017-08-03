@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <string.h>
+
+char digits[36] = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+char * trans(int n, int d, char *s)     //n:输入数字；d：进制；*s:输出
+{
+	int i = 98;
+	s[99] = '\0';
+	if (d < 2 || d > 36)
+	{
+		s[0] = '\0';
+		return NULL;
+	}
+	do
+	{
+		s[i--] = digits[n%d];    //进制转换
+		printf("%c ",s[i+1]);
+		n /= d;
+	}
+	while(n);
+	return &s[i+1];
+}
+int main()
+{
+	char str[100];
+	int num;
+	int i;
+	printf("Please input a number to translate: ");
+	scanf("%d", &num);
+	for(i = 2; i <= 36; i++)
+	{
+		printf("%5d = %s(%d)\n", num, trans(num, i, str), i);
+	}
+	return 0;
+}
